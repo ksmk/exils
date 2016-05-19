@@ -16,10 +16,8 @@ set(SOURCE_FILES
         SkyBox.hh
     )
 
-add_executable(exils ${SOURCE_FILES})
-
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 
-add_library(gust STATIC ${SOURCE_FILES})
+add_library(exilsSTATIC ${SOURCE_FILES})

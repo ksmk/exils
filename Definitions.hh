@@ -13,5 +13,6 @@
 #define Float   float
 #define Char    char
 #define GLInt   GLint
+#define GLUbyte GLubyte
 #define GLUint  GLuint
 #define GLChar  GLchar

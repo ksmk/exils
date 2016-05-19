@@ -13,7 +13,7 @@ std::string get_file_contents(const Char* filename)
 }
 
 
-void glGetShaderSource(GLUint shader, std::string const &shader_str)
+void glNGetShaderSource(GLUint shader, std::string const &shader_str)
 {
     GLChar const *shader_source = shader_str.c_str();
     GLInt  const  shader_length = shader_str.size();
@@ -23,7 +23,7 @@ void glGetShaderSource(GLUint shader, std::string const &shader_str)
 
 void load_shader(GLUint shader_obj, Char* const shader_filename)
 {
-    glGetShaderSource(shader_obj, get_file_contents(shader_filename) );
+    glNGetShaderSource(shader_obj, get_file_contents(shader_filename) );
 }
 
 void Shader::Load()
