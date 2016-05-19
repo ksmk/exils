@@ -20,4 +20,4 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 
-add_library(exilsSTATIC ${SOURCE_FILES})
+add_library(exils STATIC ${SOURCE_FILES})
