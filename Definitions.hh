@@ -14,3 +14,4 @@
 #define Char    char
 #define GLInt   GLint
 #define GLUint  GLuint
+#define GLChar  GLchar
