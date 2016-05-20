@@ -14,7 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e954017-db7d-4aee-8e0b-feb5089005e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Terrain.cc" afterPath="$PROJECT_DIR$/Terrain.cc" />
     </list>
     <ignored path="exils.iws" />
@@ -71,8 +70,8 @@
       <file leaf-file-name="Terrain.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Terrain.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4161139">
-              <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.64170617">
+              <caret line="154" column="65" selection-start-line="154" selection-start-column="65" selection-end-line="154" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -486,8 +485,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Terrain.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4161139">
-          <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.64170617">
+          <caret line="154" column="65" selection-start-line="154" selection-start-column="65" selection-end-line="154" selection-end-column="65" />
           <folding />
         </state>
       </provider>

@@ -114,18 +114,18 @@ Float Terrain::GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float
     Int	triangleQx = ((Int)Q.x)*2, triangleQz = (Int)Q.z;
 
 
-    if( (trianglePx < 0 && triangleQx < 0) || (trianglePx > (TERRAIN_SIZE-2)*2 && triangleQx > (TERRAIN_SIZE-2)*2) ) return lowest_lambda;
-    if( (trianglePz < 0 && triangleQz < 0) || (trianglePz > (TERRAIN_SIZE-2)   && triangleQz > (TERRAIN_SIZE-2)  ) ) return lowest_lambda;
+    if( (trianglePx < 0 && triangleQx < 0) || (trianglePx > (MAP_X-2)*2 && triangleQx > (MAP_X-2)*2) ) return lowest_lambda;
+    if( (trianglePz < 0 && triangleQz < 0) || (trianglePz > (MAP_X-2)   && triangleQz > (MAP_X-2)  ) ) return lowest_lambda;
 
     if(trianglePx < 0) trianglePx = 0;
-    else if(trianglePx > (TERRAIN_SIZE-2)*2) trianglePx = (TERRAIN_SIZE-2)*2;
+    else if(trianglePx > (MAP_X-2)*2) trianglePx = (MAP_X-2)*2;
     if(trianglePz < 0) trianglePz = 0;
-    else if(trianglePz > TERRAIN_SIZE-2) trianglePz = TERRAIN_SIZE-2;
+    else if(trianglePz > MAP_X-2) trianglePz = MAP_X-2;
 
     if(triangleQx < 0) triangleQx = 0;
-    else if(triangleQx > (TERRAIN_SIZE-2)*2) triangleQx = (TERRAIN_SIZE-2)*2;
+    else if(triangleQx > (MAP_X-2)*2) triangleQx = (MAP_X-2)*2;
     if(triangleQz < 0) triangleQz = 0;
-    else if(triangleQz > TERRAIN_SIZE-2) triangleQz = TERRAIN_SIZE-2;
+    else if(triangleQz > MAP_X-2) triangleQz = MAP_X-2;
 
 
     if(trianglePx == triangleQx)
@@ -133,10 +133,10 @@ Float Terrain::GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float
         if(trianglePz > triangleQz) std::swap(trianglePz,triangleQz);
         for(Int j = trianglePz; j <= triangleQz; j++)
         {
-            tri = triangles[j*(TERRAIN_SIZE-1)*2 + trianglePx];
-            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
-            tri = triangles[j*(TERRAIN_SIZE-1)*2 + trianglePx+1];
-            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+            tri = triangles[j*(MAP_X-1)*2 + trianglePx];
+            if(CollisionCheck(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+            tri = triangles[j*(MAP_X-1)*2 + trianglePx+1];
+            if(CollisionCheck(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
         }
         return lowest_lambda;
     }
@@ -145,8 +145,8 @@ Float Terrain::GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float
         if(trianglePx > triangleQx) std::swap(trianglePx,triangleQx);
         for(Int i = trianglePx; i <= triangleQx+1; i++)
         {
-            tri = triangles[trianglePz*(TERRAIN_SIZE-1)*2 + i];
-            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+            tri = triangles[trianglePz*(MAP_X-1)*2 + i];
+            if(CollisionCheck(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
         }
         return lowest_lambda;
     }
@@ -157,8 +157,8 @@ Float Terrain::GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float
     {
         for(Int j = trianglePz; j <= triangleQz; j++)
         {
-            tri = triangles[j*(TERRAIN_SIZE-1)*2 + i];
-            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+            tri = triangles[j*(MAP_X-1)*2 + i];
+            if(CollisionCheck(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
         }
     }
 
