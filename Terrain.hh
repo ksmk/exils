@@ -6,6 +6,7 @@ struct Coord { Float x,y,z; };
 struct Vec   { Float x,y,z; };
 struct Tri   { Vec N; Coord center; Coord vertices[3]; };
 
+#define MAP_X	 (1024)
 #define MAP_SIZE (1024*1024)
 
 class Terrain
@@ -17,8 +18,8 @@ public:
 	void Display();
 	void Normals();
 	Float GetHeight(Float x, Float z);
-	Float GetSegmentIntersectionLambda();
-
+	Float GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float vy, Float vz, Float dst);
+	std::vector<Vec> GetCollisionNormals(Coord &center, Float radius);
 private:
 	GLUbyte heightmap[MAP_SIZE];
 
