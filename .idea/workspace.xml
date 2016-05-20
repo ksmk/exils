@@ -15,6 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e954017-db7d-4aee-8e0b-feb5089005e4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/gl_elems.hh" afterPath="$PROJECT_DIR$/utils/gl_elems.hh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/gl_wrapper.hh" afterPath="$PROJECT_DIR$/utils/gl_wrapper.hh" />
     </list>
     <ignored path="exils.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -77,14 +78,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gl_elems.hh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gl_elems.hh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/gl_elems.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.307109">
-              <caret line="150" column="66" selection-start-line="150" selection-start-column="66" selection-end-line="150" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="139" column="47" selection-start-line="139" selection-start-column="47" selection-end-line="139" selection-end-column="47" />
               <folding>
                 <element signature="e#14#30#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gl_wrapper.hh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/gl_wrapper.hh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.37535545">
+              <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,6 +171,7 @@
         <option value="$PROJECT_DIR$/Terrain.cc" />
         <option value="$PROJECT_DIR$/utils/gl_wrapper.hpp" />
         <option value="$PROJECT_DIR$/utils/gl_elems.hh" />
+        <option value="$PROJECT_DIR$/utils/gl_wrapper.hh" />
       </list>
     </option>
   </component>
@@ -230,7 +242,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
     <property name="settings.editor.splitter.proportion" value="0.25154638" />
   </component>
   <component name="RunManager" selected="Application.exils">
@@ -659,11 +671,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/gl_elems.hh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.307109">
-          <caret line="150" column="66" selection-start-line="150" selection-start-column="66" selection-end-line="150" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="139" column="47" selection-start-line="139" selection-start-column="47" selection-end-line="139" selection-end-column="47" />
           <folding>
             <element signature="e#14#30#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/gl_wrapper.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37535545">
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

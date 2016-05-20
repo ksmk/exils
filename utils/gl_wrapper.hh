@@ -9,7 +9,7 @@ namespace gl
 typedef GLuint idtype;
 enum shader_enum
 {
-    vertex = GL_VERTEX_SHADER, 
+    vertex = GL_VERTEX_SHADER,
     fragment = GL_FRAGMENT_SHADER
 };
 
@@ -19,27 +19,21 @@ class texture;
 class attribbuffer;
 class program;
 
-
 class texture
 {
     idtype tex_id;
 public:
-    enum tex_type 
-    { 
-        rgba8 = 0, 
-        rgb8, 
-        rgb32f 
+    enum tex_type
+    {
+        rgba8 = 0,
+        rgb8,
+        rgb32f
     };
 
-
     texture() { glGenTextures(1, &tex_id); }
-
     void bind() { glBindTexture(GL_TEXTURE_2D, tex_id); }
-
     void make_storage(unsigned w, unsigned h, tex_type t, int level = 0, const char *data = 0);
-
     ~texture() { if (tex_id) glDeleteTextures(1, &tex_id); }
-
     friend class frame_buffer;
 };
 
@@ -54,13 +48,16 @@ struct dynamic_tex_type_traits
 template<const texture::tex_type t>
 struct tex_type_traits
 {
-    enum i_f {
+    enum i_f
+    {
         internal_format = GL_RGBA4
     };
-    enum fmt {
+    enum fmt
+    {
         format = GL_RGBA
     };
-    enum f_t {
+    enum f_t
+    {
         type = GL_BYTE
     };
 
@@ -70,17 +67,17 @@ struct tex_type_traits
 template<>
 struct tex_type_traits<texture::rgba8>
 {
-    enum i_f 
-    {        
+    enum i_f
+    {
         internal_format = GL_RGBA8_OES
     };
 
-    enum fmt 
+    enum fmt
     {
         format = GL_RGBA
     };
 
-    enum f_t 
+    enum f_t
     {
         type = GL_BYTE
     };
@@ -91,17 +88,17 @@ struct tex_type_traits<texture::rgba8>
 template<>
 struct tex_type_traits<texture::rgb8>
 {
-    enum i_f 
+    enum i_f
     {
         internal_format = GL_RGBA8_OES
     };
 
-    enum fmt 
+    enum fmt
     {
         format = GL_RGBA
     };
 
-    enum f_t 
+    enum f_t
     {
         type = GL_BYTE
     };
@@ -112,20 +109,22 @@ struct tex_type_traits<texture::rgb8>
 template<>
 struct tex_type_traits<texture::rgb32f>
 {
-    enum i_f {
+    enum i_f
+    {
         internal_format = GL_RGB32F_EXT
     };
-    enum fmt {
+    enum fmt
+    {
         format = GL_RGBA
     };
-    enum f_t {
+    enum f_t
+    {
         type = GL_FLOAT
     };
     constexpr static dynamic_tex_type_traits dynamic{internal_format, format, type};
 };
 
-inline void texture::make_storage(unsigned w, unsigned h, tex_type t, int level, const char *data)
-{
+inline void texture::make_storage(unsigned w, unsigned h, tex_type t, int level, const char *data) {
     static dynamic_tex_type_traits dynamics[] = {
             tex_type_traits<rgba8>::dynamic,
             tex_type_traits<rgb8>::dynamic,
@@ -163,7 +162,8 @@ class frame_buffer
 {
     idtype fb_id;
 public:
-    enum attachment_place {
+    enum attachment_place
+    {
         color = GL_COLOR_ATTACHMENT0, depth = GL_DEPTH_ATTACHMENT, stencil = GL_STENCIL_ATTACHMENT
     };
 
@@ -207,7 +207,8 @@ class shader
     friend class program;
 
 public:
-    enum shader_t {
+    enum shader_t
+    {
         shader_type = type
     };
 
@@ -252,20 +253,17 @@ class program
 {
     idtype program_id;
 public:
-    program() 
-    {
+    program() {
         program_id = glCreateProgram();
     }
 
     template<const shader_enum type>
-    void attach(const shader<type> &sh) 
-    {
+    void attach(const shader<type> &sh) {
         glAttachShader(sh.shader_id, type);
     }
 
     template<const shader_enum type>
-    void detach(const shader<type> &sh) 
-    {
+    void detach(const shader<type> &sh) {
         glDetachShader(program_id, sh.shader_id);
     }
 
@@ -274,8 +272,7 @@ public:
 
     void link() { glLinkProgram(program_id); }
 
-    std::pair<bool, std::string> link_status()
-    {
+    std::pair<bool, std::string> link_status() {
         std::string retLog;
 
         GLint logLength;
@@ -298,13 +295,11 @@ public:
     }
 
 
-    void validate() 
-    {
+    void validate() {
         glValidateProgram(program_id);
     }
 
-    std::pair<bool, std::string> validate_status() 
-    {
+    std::pair<bool, std::string> validate_status() {
         std::string retLog;
 
         GLint logLength;
@@ -326,8 +321,7 @@ public:
         return std::make_pair(program_id != 0, retLog);
     }
 
-    idtype uniform_loc(const char *name) 
-    {
+    idtype uniform_loc(const char *name) {
         return glGetUniformLocation(program_id, name);
     }
 };
