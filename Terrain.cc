@@ -78,7 +78,7 @@ bool Terrain::CollisionCheck(Coord P, Float radius, Tri tri, Coord &center)
 
 
     Float tri_orientation = (tri.vertices[0].x - tri.vertices[2].x) * (tri.vertices[1].z - tri.vertices[2].z)
-                          - (tri.vertices[0].z - tri.vertices[2].z) * (tri.vertices[1].x - tri.vertices[2].x);
+                            - (tri.vertices[0].z - tri.vertices[2].z) * (tri.vertices[1].x - tri.vertices[2].x);
     Float ABIor = (tri.vertices[0].x - I.x) * (tri.vertices[1].z - I.z) - (tri.vertices[0].z - I.z) * (tri.vertices[1].x - I.x);
     Float BCIor = (tri.vertices[1].x - I.x) * (tri.vertices[2].z - I.z) - (tri.vertices[1].z - I.z) * (tri.vertices[2].x - I.x);
     Float CAIor = (tri.vertices[2].x - I.x) * (tri.vertices[0].z - I.z) - (tri.vertices[2].z - I.z) * (tri.vertices[0].x - I.x);
@@ -92,6 +92,77 @@ bool Terrain::CollisionCheck(Coord P, Float radius, Tri tri, Coord &center)
     center.z = I.z + tri.N.z*factor;
 
     return true;
+}
+
+
+Float Terrain::GetSegmentIntersection(Float x, Float y, Float z, Float vx, Float vy, Float vz, Float dst)
+{
+    Coord P;
+    P.x = x;
+    P.y = y;
+    P.z = z;
+    Coord Q;
+    Q.x = x - dist*vx;
+    Q.y = y - dist*vy;
+    Q.z = z - dist*vz;
+
+    Tri tri;
+
+    Float lambda, lowest_lambda = 1.0f;
+
+    Int trianglePx = ((Int)P.x)*2, trianglePz = (Int)P.z;
+    Int	triangleQx = ((Int)Q.x)*2, triangleQz = (Int)Q.z;
+
+
+    if( (trianglePx < 0 && triangleQx < 0) || (trianglePx > (TERRAIN_SIZE-2)*2 && triangleQx > (TERRAIN_SIZE-2)*2) ) return lowest_lambda;
+    if( (trianglePz < 0 && triangleQz < 0) || (trianglePz > (TERRAIN_SIZE-2)   && triangleQz > (TERRAIN_SIZE-2)  ) ) return lowest_lambda;
+
+    if(trianglePx < 0) trianglePx = 0;
+    else if(trianglePx > (TERRAIN_SIZE-2)*2) trianglePx = (TERRAIN_SIZE-2)*2;
+    if(trianglePz < 0) trianglePz = 0;
+    else if(trianglePz > TERRAIN_SIZE-2) trianglePz = TERRAIN_SIZE-2;
+
+    if(triangleQx < 0) triangleQx = 0;
+    else if(triangleQx > (TERRAIN_SIZE-2)*2) triangleQx = (TERRAIN_SIZE-2)*2;
+    if(triangleQz < 0) triangleQz = 0;
+    else if(triangleQz > TERRAIN_SIZE-2) triangleQz = TERRAIN_SIZE-2;
+
+
+    if(trianglePx == triangleQx)
+    {
+        if(trianglePz > triangleQz) std::swap(trianglePz,triangleQz);
+        for(Int j = trianglePz; j <= triangleQz; j++)
+        {
+            tri = triangles[j*(TERRAIN_SIZE-1)*2 + trianglePx];
+            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+            tri = triangles[j*(TERRAIN_SIZE-1)*2 + trianglePx+1];
+            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+        }
+        return lowest_lambda;
+    }
+    if(trianglePz == triangleQz)
+    {
+        if(trianglePx > triangleQx) std::swap(trianglePx,triangleQx);
+        for(Int i = trianglePx; i <= triangleQx+1; i++)
+        {
+            tri = triangles[trianglePz*(TERRAIN_SIZE-1)*2 + i];
+            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+        }
+        return lowest_lambda;
+    }
+
+    if(trianglePx > triangleQx) std::swap(trianglePx,triangleQx);
+    if(trianglePz > triangleQz) std::swap(trianglePz,triangleQz);
+    for(Int i = trianglePx; i <= triangleQx+1; i++)
+    {
+        for(Int j = trianglePz; j <= triangleQz; j++)
+        {
+            tri = triangles[j*(TERRAIN_SIZE-1)*2 + i];
+            if(IsColliding(P,Q,tri,lambda) && lambda < lowest_lambda) lowest_lambda = lambda;
+        }
+    }
+
+    return lowest_lambda;
 }
 
 
